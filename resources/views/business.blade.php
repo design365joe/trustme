@@ -9,20 +9,25 @@
                     <h1>Reviews for {{ $business->name }}</h1>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 company-rating ">
-                    @if( ! $business->reviews->isEmpty() )
-                        <p>Average rating: {{ number_format( $business->reviews->avg( 'stars' ), 2 ) }}</p>
+                    @if( ! $business->reviewsOf->isEmpty() )
+                        <p>Average rating: {{ number_format( $business->reviewsOf->avg( 'stars' ), 2 ) }}</p>
                     @endif
                 </div>
             </div>
             <hr/>
 
             <div class="row">
-                @forelse( $business->reviews as $review )
+                @forelse( $business->reviewsOf as $review )
                     <div class="col-sm-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">{{ $review->stars }} stars - {{ $review->created_at->format( 'jS F Y' ) }}</div>
                             <div class="panel-body">{{ $review->comments }}</div>
-                            <div class="panel-footer">by {{ $review->user->name }}</div>
+                            <div class="panel-footer">
+                                by {{ $review->user->name }}
+                                @if ( Auth::id() === $business->id )
+                                    <a class=" pull-right btn btn-xs btn-primary">Reply</a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 @empty
@@ -32,7 +37,7 @@
                 @endforelse
             </div>
 
-            @if ( Auth::check() )
+            @if ( Auth::check() && Auth::user()->isMember() )
                 <hr>
                 <h3> Add a New Review</h3>
                 <form method="post" action="/business/{{ $business->id }}">

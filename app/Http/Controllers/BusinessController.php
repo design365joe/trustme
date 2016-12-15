@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Business;
+use App\User;
 
 class BusinessController extends Controller {
 
@@ -11,14 +11,14 @@ class BusinessController extends Controller {
     //accepts the name of the business that the user searched and returns the business view
 
     public function index( $id ) {
-        $business = Business::findOrFail( $id );
+        $business = User::businesses()->findOrFail( $id );
 
         return view( 'business', compact( 'business' ) );
     }
 
     public function search() {
         $searchTerm = request()->input( 'businessName' );
-        $businesses   = Business::where( 'name', 'LIKE', '%' . $searchTerm . '%' )->get();
+        $businesses = User::businesses()->where( 'name', 'LIKE', '%' . $searchTerm . '%' )->get();
 
         if ( $businesses->isEmpty() ) {
             return redirect()->back();

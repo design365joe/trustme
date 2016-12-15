@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Business;
 use App\Review;
+use App\User;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -23,13 +23,14 @@ class ReviewsController extends Controller {
     }
 
     public function store( Request $request, $id ) {
-        Business::findOrFail( $id )
-                ->reviews()
-                ->save( new Review( [
-                    'user_id'  => Auth::id(),
-                    'comments' => $request->body,
-                    'stars'    => $request->stars,
-                ] ) );
+        User::businesses()
+            ->findOrFail( $id )
+            ->reviewsOf()
+            ->save( new Review( [
+                'user_id'  => Auth::id(),
+                'comments' => $request->body,
+                'stars'    => $request->stars,
+            ] ) );
 
         return redirect()->back();
     }

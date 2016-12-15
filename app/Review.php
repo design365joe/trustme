@@ -9,11 +9,13 @@ class Review extends Model {
     protected $guarded = [];
 
     public function user() {
-        return $this->belongsTo( User::class );
+        return $this->belongsTo( User::class )
+                    ->where( 'role', 'member' );
     }
 
     public function business() {
-        return $this->belongsTo( Business::class );
+        return $this->belongsTo( User::class, 'business_id' )
+                    ->where( 'role', 'business' );
     }
 
     public function scopeNewestFirst( $query ) {

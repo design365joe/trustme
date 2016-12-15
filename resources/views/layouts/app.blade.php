@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -86,6 +86,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="./js/app.js"></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>

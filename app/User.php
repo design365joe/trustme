@@ -27,16 +27,19 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
-    public function reviews() {
+    public function reviewsMade() {
         return $this->hasMany( Review::class );
     }
 
-    public function isMember() {
-        if ( $this->role == 'member' ) {
-            return true;
-        } else {
-            return false;
-        }
+    public function reviewsOf() {
+        return $this->hasMany( Review::class, 'business_id' );
+    }
 
+    public function scopeBusinesses( $query ) {
+        return $query->where( 'role', 'business' );
+    }
+
+    public function isMember() {
+        return $this->role === 'member';
     }
 }
