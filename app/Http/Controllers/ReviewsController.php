@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Http\Controllers;
+use App\Business;
+use DB;
+use App\Review;
+use App\User;
+
+use Illuminate\Http\Request;
+
+class ReviewsController extends Controller
+{
+    /**
+     * @param User $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function fetchReviews(){
+        
+           $reviews = Review::all();
+        //$reviews =Review::with('user_id','stars', 'comments')->get();
+       //$userName = $reviews->user_id->name;
+        return view('/home', compact('reviews'));
+    }
+
+    public function store(Request $request, Business $business){
+        $review = new Review;
+
+        $review->comments = $request->body;
+
+        $business->reviews()->save($review);
+
+        return redirect('/business');
+    }
+
+    
+    
+}

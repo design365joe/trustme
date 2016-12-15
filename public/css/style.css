@@ -1,0 +1,45 @@
+.full-height {
+    height: 60vh;
+    background-color: #b1b7ba;
+
+}
+
+#mainTitle{
+    text-align: center;
+    top: 150px;
+
+}
+
+#searchBox{
+    position: relative;
+    left:320px;
+    width: 600px;
+    height: 60px;
+    padding: 20px 20px 0 20px;
+    margin-top: 20px;
+}
+
+.text{
+
+    width: 400px;
+    padding: 5px;
+    font-size: 15px;
+    color: #c0a16b;
+    background: white;
+    font-weight: bold;
+}
+
+.submit{
+
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+    background: #9d9d9d;
+    font-size: 15px;
+}
+
+.content {
+    text-align: center;
+    height:100px;
+    background-color: #2a88bd;
+}
