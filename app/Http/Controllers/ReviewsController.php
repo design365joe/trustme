@@ -16,10 +16,9 @@ class ReviewsController extends Controller
      */
     public function fetchReviews(){
         
-           $reviews = Review::all();
-        //$reviews =Review::with('user_id','stars', 'comments')->get();
-       //$userName = $reviews->user_id->name;
-        return view('/home', compact('reviews'));
+       $userData = DB::table('users')->join('reviews', 'users.id', '=', 'reviews.user_id')->select('users.name', 'reviews.comments', 'reviews.stars', 'reviews.business_id')->get();
+
+       return view('/home' , compact('userData'));
     }
 
     public function store(Request $request, Business $business){
