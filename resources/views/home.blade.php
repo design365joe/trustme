@@ -22,20 +22,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-             @foreach($reviews as $review)
+             @foreach($userData as $user)
 
                     <div class="reviewUser">
-                       The user: <b>{{$review->user_id}}</b>
+                       The user: <b>{{$user->name}}</b>
                     </div>
                     <div class="reviewBusiness">
-                        wrote a review about <b>{{$review->business_id}}</b>
+                        wrote a review about <b>{{$user->business_id}}</b>
                     </div>
                     <div class="review">
                         <div class = "reviewBody">
-                            <p> " {{$review->comments}} "</p>
+                            <p> " {{$user->comments}} "</p>
                         </div>
                         <div class="reviewRating">
-                            <p>Rating:{{$review->stars}}/5 </p>
+                            <p>Rating:{{$user->stars}}/5 </p>
                         </div>
                 </div>
                 <hr />
