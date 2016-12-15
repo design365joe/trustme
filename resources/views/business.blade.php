@@ -1,36 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="company-summary">
 
-
-<div class="company-summary">
-
-    <div class="container">
-        <div class="row headline">
-            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 company-title">
-                <h1> Here is Company's Name</h1>
+        <div class="container">
+            <div class="row headline">
+                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 company-title">
+                    <h1>Reviews for {{ $business->name }}</h1>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 company-rating ">
+                    @if( ! $business->reviews->isEmpty() )
+                        <p>Average rating: {{ number_format( $business->reviews->avg( 'stars' ), 2 ) }}</p>
+                    @endif
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 company-rating ">
-                <p> <span> Average </span> <span> * here is the average *</span> <span> from 0-10</span> </p>
+            <hr/>
+
+            <div class="row">
+                @forelse( $business->reviews as $review )
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">{{ $review->stars }} stars - {{ $review->created_at->format( 'jS F Y' ) }}</div>
+                            <div class="panel-body">{{ $review->comments }}</div>
+                            <div class="panel-footer">by {{ $review->user->name }}</div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-xs-12">
+                        <div class="well"><em>There are no reviews for this company yet.</em></div>
+                    </div>
+                @endforelse
             </div>
-        </div>
-        <hr />
 
-
-
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <h1> Here are company's reviews </h1>
-
-                <ul class="list-group">
-                    <li> review 1</li>
-                </ul>
-
+            @if ( Auth::check() )
                 <hr>
                 <h3> Add a New Review</h3>
-                <form method="post" action="/business">
+                <form method="post" action="/business/{{ $business->id }}">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <textarea name="body" class="form-control"></textarea>
+                        <input type="text" class="form-control" name="stars" placeholder="Star rating (out of 5)"/>
                     </div>
 
                     <div class="form-group">
@@ -38,21 +47,7 @@
                     </div>
 
                 </form>
-            </div>
-
-
+            @endif
         </div>
-
-        <hr />
-
-
-
-
     </div>
-
-
-</div>
-
-
-
 @stop

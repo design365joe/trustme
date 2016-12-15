@@ -2,12 +2,11 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
+
     use Notifiable;
 
     /**
@@ -27,15 +26,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
-    public function reviews(){
-        return $this->hasMany(Review::class);
+
+    public function reviews() {
+        return $this->hasMany( Review::class );
     }
 
-    public function isMember(){
-        if($this->role == 'member'){
+    public function isMember() {
+        if ( $this->role == 'member' ) {
             return true;
-        }else{
+        } else {
             return false;
         }
 

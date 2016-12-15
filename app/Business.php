@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Business extends Model
-{
-    //
+class Business extends Model {
 
-    public function reviews(){
-        return $this->hasMany(Review::class);
+    public function reviews() {
+        return $this->hasMany( Review::class );
     }
+
 }

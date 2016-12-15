@@ -4,51 +4,49 @@
 
     <div class="flex-center position-ref full-height">
 
-        <div class="col-md-8 col-md-offset-2" id="mainTitle">
-            <h1>  Review and discover great companies! </h1>
+        <div class="col-xs-8 col-xs-offset-2" id="mainTitle">
+            <h1> Review and discover great companies! </h1>
             <div id="searchBox">
-
-                <form method="get" action="{{ url('/business') }}" class="form-group">
-                    <input type = "text" class="text" id="businessName" name="businessName">
-                    <button type = "submit" class="btn btn-info"> Search </button>
-
+                <form method="post" action="{{ url('/business/search') }}" class="form-group">
+                    {{ csrf_field() }}
+                    <input type="text" class="text" id="businessName" name="businessName">
+                    <button type="submit" class="btn btn-info"> Search</button>
                 </form>
             </div>
         </div>
     </div>
 
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-             @foreach($userData as $user)
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h2>Latest Reviews</h2>
+                @foreach($reviews as $review)
 
                     <div class="reviewUser">
-                       The user: <b>{{$user->name}}</b>
+                        The user: <b>{{ $review->user->name }}</b>
                     </div>
                     <div class="reviewBusiness">
-                        wrote a review about <b>{{$user->business_id}}</b>
+                        wrote a review about <b>{{ $review->business->name }}</b>
                     </div>
                     <div class="review">
-                        <div class = "reviewBody">
-                            <p> " {{$user->comments}} "</p>
+                        <div class="reviewBody">
+                            <p>"{{ $review->comments }} "</p>
                         </div>
                         <div class="reviewRating">
-                            <p>Rating:{{$user->stars}}/5 </p>
+                            <p>Rating:{{ $review->stars }}/5 </p>
                         </div>
-                </div>
-                <hr />
+                    </div>
+                    <hr/>
                 @endforeach
 
 
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+            </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-
-        </div>
-    </div>
-</div>
 @endsection
