@@ -1,0 +1,8 @@
+1) Can't install Gulp
+
+2) Error when business table created
+Illuminate\Database\QueryException with message 'SQLSTATE[42S02]: Base table or view not found: 1146 
+
+
+3) Fetch data from multiple tables
+
