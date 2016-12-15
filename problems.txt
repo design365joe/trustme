@@ -1,8 +1,12 @@
 1) Can't install Gulp
 
-2) Error when business table created
+2) Should I have a business table
+
+3) Error when tried to access business table 
 Illuminate\Database\QueryException with message 'SQLSTATE[42S02]: Base table or view not found: 1146 
 
+4) Fetch data from multiple tables
 
-3) Fetch data from multiple tables
+5) How can I access authenticated user's properties 
 
+6) Passing data from form (search bar) to the views
